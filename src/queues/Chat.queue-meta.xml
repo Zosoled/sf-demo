@@ -9,6 +9,6 @@
     </queueMembers>
     <queueRoutingConfig>ChatRoutingConfiguration</queueRoutingConfig>
     <queueSobject>
-        <sobjectType>LiveAgentSession</sobjectType>
+        <sobjectType>LiveChatTranscript</sobjectType>
     </queueSobject>
 </Queue>
