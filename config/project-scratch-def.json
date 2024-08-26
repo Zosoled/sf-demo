@@ -1,0 +1,39 @@
+{
+	"orgName": "Demo Org",
+	"edition": "Enterprise",
+	"features": [
+		"Communities",
+		"LegacyLiveAgentRouting",
+		"LightningSalesConsole",
+		"LightningServiceConsole",
+		"LiveAgent",
+		"ServiceCloud",
+		"ServiceUser"
+	],
+	"objectSettings": {
+		"account": {
+			"sharingModel": "read"
+		},
+		"opportunity": {
+			"sharingModel": "read"
+		}
+	},
+	"settings": {
+		"communitiesSettings": {
+			"enableNetworksEnabled": true
+		},
+		"lightningExperienceSettings": {
+			"enableS1DesktopEnabled": true,
+			"enableUsersAreLightningOnly": true
+		},
+		"liveAgentSettings": {
+			"enableLiveAgent": true
+		},
+		"omniChannelSettings": {
+			"enableOmniChannel": true
+		},
+		"userManagementSettings": {
+			"enableNewProfileUI": true
+		}
+	}
+}

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <assignments>
+        <description>Copy standard Website field to custom WebsiteText__c field so that fuzzy matching rules can be used.
+Copy standard Website field with protocol and path stripped to custom Hostname__c field for broader matching rules.
+Copy standard Company field or FirstName+LastName fields to custom CompanyOrName__c field so that duplication rules can be mapped while also excluding common Company values like &quot;n/a&quot; and &quot;[[Unknown]]&quot;.</description>
+        <name>CopyFields</name>
+        <label>Copy Fields</label>
+        <locationX>176</locationX>
+        <locationY>311</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.WebsiteText__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Website</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Hostname__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>WebsiteSansProtocolSansPath</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.CompanyOrName__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>CompanyOrName</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <description>Mutates standard text fields to custom text fields so that they are searchable and various duplicate matching rules can be used.</description>
+    <formulas>
+        <name>CompanyOrName</name>
+        <dataType>String</dataType>
+        <expression>if(contains(&quot;:na:n/a:n/a company:unknown:[[unknown]]:&quot;, lower({!$Record.Company})),
+  if(isblank({!$Record.FirstName}),&quot;&quot;,{!$Record.FirstName} &amp; &quot; &quot;) &amp; {!$Record.LastName},
+  {!$Record.Company}
+)</expression>
+    </formulas>
+    <formulas>
+        <description>Removes the protocol from the start of the Website field.</description>
+        <name>WebsiteSansProtocol</name>
+        <dataType>String</dataType>
+        <expression>if(contains({!$Record.Website}, &quot;://&quot;), substitute({!$Record.Website}, left({!$Record.Website}, find(&quot;://&quot;, {!$Record.Website}) + 2), &quot;&quot;), {!$Record.Website})</expression>
+    </formulas>
+    <formulas>
+        <description>After protocol is removed, strips path from Website.</description>
+        <name>WebsiteSansProtocolSansPath</name>
+        <dataType>String</dataType>
+        <expression>if(contains({!WebsiteSansProtocol}, &quot;/&quot;), left({!WebsiteSansProtocol}, find(&quot;/&quot;, {!WebsiteSansProtocol}) - 1), {!WebsiteSansProtocol})</expression>
+    </formulas>
+    <interviewLabel>Lead: Before Update {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Lead: Before Update</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>CopyFields</targetReference>
+        </connector>
+        <object>Lead</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

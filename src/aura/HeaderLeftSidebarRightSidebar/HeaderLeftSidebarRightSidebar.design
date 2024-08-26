@@ -1,0 +1,28 @@
+<design:component label="Header, Left Sidebar, Right Sidebar">
+    <flexipage:template>
+        <flexipage:region name="header"
+                          label="Header"
+                          defaultWidth="Small">
+            <flexipage:formfactor type="Large" width="Large" />
+        </flexipage:region>
+        <flexipage:region name="left"
+                          label="Left Sidebar"
+                          defaultWidth="Small">
+            <flexipage:formfactor type="Large" width="Small" />
+        </flexipage:region>
+        <flexipage:region name="main"
+                          label="Main Region"
+                          defaultWidth="Small">
+            <flexipage:formfactor type="Large" width="Medium" />
+        </flexipage:region>
+        <flexipage:region name="right"
+                          label="Right Sidebar"
+                          defaultWidth="Small">
+            <flexipage:formfactor type="Large" width="Small" />
+        </flexipage:region>
+    </flexipage:template>
+    <design:supportedFormFactors>
+        <design:supportedFormFactor type="Small" />
+        <design:supportedFormFactor type="Large" />
+    </design:supportedFormFactors>
+</design:component>

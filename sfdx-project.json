@@ -1,0 +1,23 @@
+{
+	"packageDirectories": [
+		{
+			"versionName": "ver 0.1",
+			"versionNumber": "0.1.0.NEXT",
+			"path": "src",
+			"default": false,
+			"package": "sf-demo",
+			"versionDescription": ""
+		},
+		{
+			"path": "force-app",
+			"default": true
+		}
+	],
+	"name": "sf-demo",
+	"namespace": "",
+	"sfdcLoginUrl": "https://chrisduncan-dev-ed.develop.my.salesforce.com",
+	"sourceApiVersion": "61.0",
+	"packageAliases": {
+		"sf-demo": "0HoKW000000oLky0AE"
+	}
+}

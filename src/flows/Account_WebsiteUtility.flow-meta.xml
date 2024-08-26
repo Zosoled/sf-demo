@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>51.0</apiVersion>
+    <assignments>
+        <description>Copy standard Website field to custom Hostname__c field so that fuzzy matching rules can be used.</description>
+        <name>SetHostnameField</name>
+        <label>Set Hostname Field</label>
+        <locationX>176</locationX>
+        <locationY>311</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Hostname__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>WebsiteSansProtocolSansPathSansWww</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.WebsiteText__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Website</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <description>Copies standard Website field which is not searchable to a custom field that is. Parses Hostname out of Website which allows fuzzy matching rules for deduplication.</description>
+    <formulas>
+        <description>Removes the protocol from the start of the Website field.</description>
+        <name>WebsiteSansProtocol</name>
+        <dataType>String</dataType>
+        <expression>if(contains({!$Record.Website}, &quot;://&quot;), substitute({!$Record.Website}, left({!$Record.Website}, find(&quot;://&quot;, {!$Record.Website}) + 2), &quot;&quot;), {!$Record.Website})</expression>
+    </formulas>
+    <formulas>
+        <description>After protocol is removed, strips path from Website.</description>
+        <name>WebsiteSansProtocolSansPath</name>
+        <dataType>String</dataType>
+        <expression>if(contains({!WebsiteSansProtocol}, &quot;/&quot;), left({!WebsiteSansProtocol}, find(&quot;/&quot;, {!WebsiteSansProtocol}) - 1), {!WebsiteSansProtocol})</expression>
+    </formulas>
+    <formulas>
+        <description>Removes common subdomain www. from hostname.</description>
+        <name>WebsiteSansProtocolSansPathSansWww</name>
+        <dataType>String</dataType>
+        <expression>if(left({!WebsiteSansProtocolSansPath}, 4) = &quot;www.&quot;, right({!WebsiteSansProtocolSansPath}, len({!WebsiteSansProtocolSansPath}) - 4), {!WebsiteSansProtocolSansPath})</expression>
+    </formulas>
+    <interviewLabel>Account: Website Utility {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Account: Website Utility</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>SetHostnameField</targetReference>
+        </connector>
+        <filterLogic>1 OR (2 AND 3)</filterLogic>
+        <filters>
+            <field>Website</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Website</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>WebsiteText__c</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </filters>
+        <object>Account</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

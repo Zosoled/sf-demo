@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>WebsiteSansProtocolSansPathSansWww__c</fullName>
+    <externalId>false</externalId>
+    <formula>if(left(WebsiteSansProtocolSansPath__c, 4) = &quot;www.&quot;, right(WebsiteSansProtocolSansPath__c, len(WebsiteSansProtocolSansPath__c) - 4), WebsiteSansProtocolSansPath__c)</formula>
+    <label>WebsiteSansProtocolSansPathSansWww</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

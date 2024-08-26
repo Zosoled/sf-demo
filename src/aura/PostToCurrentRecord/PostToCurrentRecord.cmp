@@ -1,0 +1,8 @@
+<aura:component implements="force:hasRecordId,flexipage:availableForAllPageTypes" access="global">
+    <aura:handler name="render" value="{!this}" action="{!c.setRecordId}"/>
+    <lightning:button label="Reset" title="Reset" onclick="{!c.resetFlow}"
+        	          variant="destructive-text" iconName="utility:refresh"
+                      class="slds-m-around_small slds-m-bottom_none"/>
+	<lightning:flow aura:id="flow"/>
+	{!v.body}
+</aura:component>

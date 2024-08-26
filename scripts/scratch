@@ -1,0 +1,13 @@
+#!/usr/bin/bash
+
+sf org create scratch -f config/project-scratch-def.json -y 30 -d &&
+sf org display --json | jq '.result' >> .env &&
+echo -e "\nSleeping for a minute to allow sharing rules to update..." &&
+sleep 1m &&
+sf project deploy start -d src &&
+sf org assign permsetlicense --name ServiceUserPsl &&
+sf org assign permset --name Hostname &&
+sf org assign permset --name ChatPresenceOnline &&
+sf data record create --sobject Account --values "Name='Test Company' Website='www.example.com/path?query=string'" &&
+sf data record create --sobject Lead --values "FirstName='John' LastName='Doe' Company='Test Company' Website='example.com'" &&
+sf org open

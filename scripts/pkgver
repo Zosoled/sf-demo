@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+
+sf package version create -cxw 90 -d src -f config/project-scratch-def.json -p sf-demo

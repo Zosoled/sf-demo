@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidUrl</fullName>
+    <active>true</active>
+    <description>Validates that the Website field is an actual acceptable URL-formatted string.</description>
+    <errorConditionFormula>not(isnew()) &amp;&amp;
+not(isblank(Website)) &amp;&amp;
+not(regex(Website,
+&quot;^(http[s]?\\:\\/\\/)?(\\S+\\.)+([A-Za-z]{1,18})(\\/.*)*$&quot;
+))</errorConditionFormula>
+    <errorDisplayField>Website</errorDisplayField>
+    <errorMessage>Website is not an acceptable URL.</errorMessage>
+</ValidationRule>

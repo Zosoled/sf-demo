@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ConvertedStatus</fullName>
+    <active>false</active>
+    <description>Ensures users click the Convert button to convert Leads instead of simply updating the Status value.</description>
+    <errorConditionFormula>not(IsConverted) &amp;&amp;
+isPickval(Status, &apos;Converted&apos;) &amp;&amp;
+not(isPickval(priorValue(Status), &apos;Converted&apos;))</errorConditionFormula>
+    <errorDisplayField>Status</errorDisplayField>
+    <errorMessage>Convert this lead to set the status to Converted.</errorMessage>
+</ValidationRule>

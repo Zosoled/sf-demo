@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CompanyOrName__c</fullName>
+    <description>Set by automation. Returns company name if it exists and is not in a predefined list of excluded values. Otherwise, returns first and last name</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Set by automation. Returns company name if it exists and is not in a predefined list of excluded values. Otherwise, returns first and last name.</inlineHelpText>
+    <label>Company or Name</label>
+    <length>255</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

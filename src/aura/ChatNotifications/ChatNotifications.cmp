@@ -1,0 +1,9 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" controller="ChatNotifications_CTRL" >
+    <lightning:omniToolkitAPI aura:id="omniToolkit" />
+    <aura:handler name="init" value="{! this }" action="{! c.initialize }"/>
+    <aura:handler event="lightning:omniChannelLoginSuccess" action="{! c.onLoginSuccess }"/>
+    <aura:handler event="lightning:omniChannelStatusChanged" action="{! c.onStatusChanged }"/>
+    <aura:handler event="lightning:omniChannelWorkAssigned" action="{! c.onWorkAssigned }"/>
+    <aura:handler event="lightning:omniChannelWorkAccepted" action="{! c.onWorkAccepted }"/>
+    <aura:handler event="lightning:omniChannelLogout" action="{! c.onLogout }"/>
+</aura:component>
