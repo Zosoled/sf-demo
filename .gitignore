@@ -1,4 +1,5 @@
 .sf/
 .sfdx/
+force-app
 
 .env
