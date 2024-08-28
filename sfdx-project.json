@@ -1,15 +1,14 @@
 {
 	"packageDirectories": [
 		{
-			"versionName": "ver 0.1",
-			"versionNumber": "0.1.0.NEXT",
-			"path": "src",
-			"default": false,
 			"package": "sf-demo",
-			"versionDescription": ""
+			"versionNumber": "0.1.0.NEXT",
+			"versionDescription": "",
+			"path": "src",
+			"default": false
 		},
 		{
-			"path": "force-app",
+			"path": "default",
 			"default": true
 		}
 	],

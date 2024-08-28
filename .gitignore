@@ -1,5 +1,5 @@
 .sf/
 .sfdx/
-force-app
+default/
 
 .env
