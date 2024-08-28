@@ -9,5 +9,5 @@
 ) &&
 read -p "Please enter the release version: " version &&
 echo $version.NEXT
-sf package version create -cxw 90 -d src -f config/project-scratch-def.json -p sf-demo -n $version.NEXT &&
+sf package version create -cxw 90 -f config/project-scratch-def.json -p sf-demo -n $version.NEXT &&
 sf package version promote -p "sf-demo@$version-1"
